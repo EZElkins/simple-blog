@@ -11,7 +11,7 @@ host = '127.0.0.1'
 port = 9000
 
 def index(request):
-	return web.Response(body='<h1>Home Page...</h1>', content_type='text/html')
+	return web.Response(body=b'<h1>Home Page...</h1>', content_type='text/html')
 
 async def init(loop):
 	app = web.Application(loop=loop)
