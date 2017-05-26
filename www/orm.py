@@ -57,11 +57,12 @@ async def select(sql, args, size=None):
 async def execute(sql, args, autocommit=True):
     log(sql)
 
+    # print(sql, '\n', args, autocommit)
     async with __pool.get() as connector:
         if not autocommit:
             await connector.begin()
         try:
-            async with connector.cursor() as cursor:
+            async with connector.cursor(aiomysql.DictCursor) as cursor:
                 await cursor.execute(sql.replace('?', '%s'), args)
                 affectedRowCount = cursor.rowcount
             if not autocommit:
@@ -139,7 +140,7 @@ class ModelMetaClass(type):
             return type.__new__(cls, name, bases, attrs)
 
         tablename = attrs.get('__table__', None) or name
-        print('cls:%s name:%s bases:%s attrs:%s tablename:%s' % (cls, name, bases, attrs, tablename))
+        # print('cls:%s name:%s bases:%s attrs:%s tablename:%s' % (cls, name, bases, attrs, tablename))
         logging.info('found model: %s (table: %s)' % (name, tablename))
 
         mappings = dict()
@@ -265,6 +266,7 @@ class Model(dict, metaclass=ModelMetaClass):
     async def save(self):
         args = list(map(self.getValueOrDefault, self.__fields__))
         args.append(self.getValueOrDefault(self.__primary_key__))
+        print(self.__insert__, '\n', args)
         rows = await execute(self.__insert__, args)
 
         if rows != 1:
