@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Test users - Python Webapp</title>
+    <style>
+        #users
+        {
+            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+            width:70%;
+            border-collapse:collapse;
+        }
+        #users td, #users th 
+        {
+            font-size:1em;
+            border:1px solid #E3D87E;
+            padding:3px 7px 2px 7px;
+        }
+        #users th 
+        {
+            font-size:1.1em;
+            text-align:left;
+            padding-top:5px;
+            padding-bottom:4px;
+            background-color:#748067;
+            color:#ffffff;
+        }
+        #users tr.alt td 
+        {
+            color:#000000;
+            background-color:#EAF2D3;
+        }
+    </style>
+</head>
+<body>
+    <h1>All users</h1>
+    <table id='users'>
+        <tr>
+            <th>name</th>
+            <th>email</th>
+            <th>avatar</th>
+        </tr>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.name }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{ u.avatar }}</td>
+        </tr>
+        <!-- <p>{{ u.name }} / {{ u.email }} / {{ u.avatar }}</p> -->
+        {% endfor %}
+    </table>
+
+</body>
+</html>

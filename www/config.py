@@ -6,7 +6,7 @@ Configuration
 '''
 
 
-import config_default
+import config_default as cd
 
 class Dict(dict):
     '''
@@ -44,11 +44,11 @@ def toDict(d):
         D[k] = toDict(v) if isinstance(v, dict) else v
     return D
 
-configs = config_default.configs
+configs = cd.configs
 
 try:
-    import config_override
-    configs = merge(configs, config_override.configs)
+    import config_override as co
+    configs = merge(configs, co.configs)
 except ImportError:
     pass
 
