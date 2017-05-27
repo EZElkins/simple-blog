@@ -41,6 +41,9 @@
                 <li><a target="_blank" href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000"><i class="uk-icon-book"></i> 教程</a></li>
                 <li><a target="_blank" href="https://github.com/michaelliao/awesome-python3-webapp"><i class="uk-icon-code"></i> 源码</a></li>
                 <li><a target="_blank" href="/users"><i class="uk-icon-user"></i> 所有用户</a></li>
+                {% if __user__ and __user__.admin %}
+                    <li><a href="/manage/blogs/edit"><i class="uk-icon-pencil"></i> 发布博文</a></li>
+                {% endif %}
             </ul>
             <div class="uk-navbar-flip">
                 <ul class="uk-navbar-nav">
